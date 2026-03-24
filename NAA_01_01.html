@@ -44,7 +44,7 @@
                                 <div class="card-header">
                                     <div class="card-label">
                                         <svg class="card-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.94 12.21 22 12 22C11.79 22 11.59 21.94 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.06 11.79 2 12 2C12.21 2 12.41 2.06 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z"/></svg>
-                                        <span>카드</span>
+                                        <span>모델</span>
                                     </div>
                                     <span class="status-badge">모델 탑재</span>
                                 </div>
@@ -57,44 +57,22 @@
                                         <svg class="card-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                                         <span>범위</span>
                                     </div>
-                                    <span class="status-badge highlight">아래 방식 택 1</span>
+                                    <span class="status-badge">추론 범위 방식</span>
                                 </div>
-                                <div class="card-content initial-text">범위를 선택해 주세요</div>
+                                <div class="card-content initial-text">추론 범위를 선택해 주세요</div>
                             </div>
                         </div>
 
-                        <!-- Inference Method Selection -->
-                        <div class="method-section">
-                            <h3 class="section-title">추론 범위 방식</h3>
-                            <div class="method-selector">
-                                <button class="method-btn active">
-                                    <span class="btn-main">필지 기반</span>
-                                    <span class="btn-sub">필지별 크롭</span>
-                                </button>
-                                <button class="method-btn">
-                                    <span class="btn-main">SHP 영역</span>
-                                    <span class="btn-sub">영액 내부 타이링</span>
-                                </button>
-                                <button class="method-btn">
-                                    <span class="btn-main">지도 그리기</span>
-                                    <span class="btn-sub">직접 영역 지정</span>
-                                </button>
-                                <button class="method-btn">
-                                    <span class="btn-main">전체 추론</span>
-                                    <span class="btn-sub">영상 전체</span>
-                                </button>
-                            </div>
-                        </div>
 
                         <!-- Run Analysis Button -->
-                        <button class="run-analysis-btn">
+                        <button class="run-analysis-btn" id="analyze-btn" disabled>
                             <svg class="play-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
                             <span>분석 실행</span>
                         </button>
 
                         <!-- Inference Pipeline -->
-                        <div class="pipeline-section">
-                            <h3 class="section-title">추론 파이프라인</h3>
+                        <div class="pipeline-section hidden">
+                            <h4 class="section-title">추론 파이프라인</h4>
                             <div class="pipeline-tags">
                                 <span class="tag">크롭</span>
                                 <span class="tag">타일링</span>
@@ -216,10 +194,133 @@
                             </button>
                         </div>
                     </div>
+
+                    <!-- Model Selection Layer (Floating Popup) -->
+                    <div id="model-selection-layer" class="model-list-layer hidden">
+                        <div class="layer-header">
+                            <h3 class="layer-title">모델을 선택해 주세요</h3>
+                        </div>
+                        <div class="model-item-list">
+                            <!-- Model Items as Grid Cards -->
+                            <div class="model-item clickable" data-title="사료작물(생육기)">
+                                <div class="model-thumb">
+                                    <img src="./model_img_1.png" alt="사료작물(생육기)">
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">사료작물 (생육기)</h4>
+                                    <p class="model-desc">남원 영농 · Seg</p>
+                                    <div class="model-meta">mAP <strong>0.890</strong></div>
+                                </div>
+                            </div>
+                            <div class="model-item clickable" data-title="사료작물(생산기)">
+                                <div class="model-thumb">
+                                    <img src="./model_img_2.png" alt="사료작물(생산기)">
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">사료작물 (생산기)</h4>
+                                    <p class="model-desc">남원 영농 · Seg</p>
+                                    <div class="model-meta">mAP <strong>0.875</strong></div>
+                                </div>
+                            </div>
+                            <div class="model-item clickable" data-title="곤포사일리지">
+                                <div class="model-thumb">
+                                    <img src="./model_img_3.png" alt="곤포사일리지">
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">곤포사일리지</h4>
+                                    <p class="model-desc">남원 영농 · Det</p>
+                                    <div class="model-meta">mAP <strong>0.910</strong></div>
+                                </div>
+                            </div>
+                            <div class="model-item clickable" data-title="비닐하우스">
+                                <div class="model-thumb">
+                                    <img src="./model_img_4.png" alt="비닐하우스">
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">비닐하우스</h4>
+                                    <p class="model-desc">남원 구축물 · Seg</p>
+                                    <div class="model-meta">mAP <strong>0.882</strong></div>
+                                </div>
+                            </div>
+                            <div class="model-item clickable" data-title="농지 활용">
+                                <div class="model-thumb">
+                                    <img src="./model_img_5.png" alt="농지 활용">
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">농지 활용</h4>
+                                    <p class="model-desc">남원 영농 · Cls</p>
+                                    <div class="model-meta">mAP <strong>0.840</strong></div>
+                                </div>
+                            </div>
+                            <div class="model-item clickable" data-title="방치 쓰레기">
+                                <div class="model-thumb">
+                                    <img src="./model_img_6.png" alt="방치 쓰레기">
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">방치 쓰레기</h4>
+                                    <p class="model-desc">남원 환경 · Det</p>
+                                    <div class="model-meta">mAP <strong>0.750</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Extent Selection Layer (Floating Popup) -->
+                    <div id="extent-selection-layer" class="extent-list-layer hidden">
+                        <div class="layer-header">
+                            <h3 class="layer-title">추론 범위를 선택해 주세요</h3>
+                        </div>
+                        <div class="extent-item-list">
+                            <div class="extent-item clickable" data-title="필지 기반">
+                                <div class="extent-info">
+                                    <h4 class="extent-title">필지 기반</h4>
+                                    <p class="extent-desc">필지별 크롭</p>
+                                </div>
+                                <span class="extent-selected-text">선택됨</span>
+                            </div>
+                            <div class="extent-item clickable" data-title="SHP 영역">
+                                <div class="extent-info">
+                                    <h4 class="extent-title">SHP 영역</h4>
+                                    <p class="extent-desc">영역 내부 타일링</p>
+                                </div>
+                                <span class="extent-selected-text">선택됨</span>
+                            </div>
+                            <div class="extent-item clickable" data-title="지도 그리기">
+                                <div class="extent-info">
+                                    <h4 class="extent-title">지도 그리기</h4>
+                                    <p class="extent-desc">직접 영역 지정</p>
+                                </div>
+                                <span class="extent-selected-text">선택됨</span>
+                            </div>
+                            <div class="extent-item clickable" data-title="전체 추론">
+                                <div class="extent-info">
+                                    <h4 class="extent-title">전체 추론</h4>
+                                    <p class="extent-desc">영상 전체</p>
+                                </div>
+                                <span class="extent-selected-text">선택됨</span>
+                            </div>
+                        </div>
+                    </div>
                 </aside>
 
                 <!-- Right Panel: Map Display (2/3) -->
                 <section class="map-container">
+                    <!-- Analysis Progress Overlay -->
+                    <div id="analysis-progress-overlay" class="progress-overlay hidden">
+                        <div class="progress-header">
+                            <h3 class="progress-title">분석 진행 중</h3>
+                            <div class="progress-badge">추론중 42%</div>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: 42%;"></div>
+                        </div>
+                        <div class="progress-details">
+                            <p class="progress-stats">필지 1,083 / 2,583 · 잔여 1시간 30분</p>
+                            <p class="progress-step-forward">결과: GPKG → GeoServer 자동 등록 → 지도 레이어 추가</p>
+                            <p class="progress-step-forward">편집(보정) → 학습데이터 자동 생성 → 재학습 순환</p>
+                        </div>
+                    </div>
+                    
                     <div id="map" class="map-panel"></div>
                 </section>
             </div>
@@ -234,62 +335,160 @@
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Initial Map Setup
             setTimeout(() => {
-                const map = L.map('map', {
+                window.landXiMap = L.map('map', {
                     zoomControl: false 
-                }).setView([35.416, 127.390], 13);
+                }).setView([36.3, 127.8], 7);
 
                 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                     maxZoom: 19,
                     attribution: 'Tiles &copy; Esri'
-                }).addTo(map);
+                }).addTo(window.landXiMap);
 
                 L.control.zoom({
                     position: 'bottomright'
-                }).addTo(map);
+                }).addTo(window.landXiMap);
             }, 500);
 
-            // 2. Video Selection Layer Logic
+            // 2. Video & Model Selection Layer Logic
             const videoCard = document.getElementById('video-card');
-            const selectionLayer = document.getElementById('video-selection-layer');
+            const modelCard = document.getElementById('model-card');
+            const extentCard = document.getElementById('extent-card');
+            const analyzeBtn = document.getElementById('analyze-btn');
+
+            const videoLayer = document.getElementById('video-selection-layer');
+            const modelLayer = document.getElementById('model-selection-layer');
+            const extentLayer = document.getElementById('extent-selection-layer');
+            
             const videoItems = document.querySelectorAll('.video-item');
+            const modelItems = document.querySelectorAll('.model-item');
+            const extentItems = document.querySelectorAll('.extent-item');
 
-            if (videoCard && selectionLayer) {
-                // Toggle Layer
+            // Form Validation Logic
+            const checkReadyState = () => {
+                const vSelected = videoCard.classList.contains('active');
+                const mSelected = modelCard.classList.contains('active');
+                const eSelected = extentCard.classList.contains('active');
+                
+                if (vSelected && mSelected && eSelected) {
+                    analyzeBtn.disabled = false;
+                } else {
+                    analyzeBtn.disabled = true;
+                }
+            };
+
+            // Toggle Layers (Exclusive)
+            const closeAllLayers = () => {
+                if (videoLayer) videoLayer.classList.add('hidden');
+                if (modelLayer) modelLayer.classList.add('hidden');
+                if (extentLayer) extentLayer.classList.add('hidden');
+            };
+
+            if (videoCard && videoLayer) {
                 videoCard.addEventListener('click', (e) => {
-                    console.log('Video card clicked, toggling selection layer');
+                    if (videoCard.classList.contains('disabled')) return;
                     e.stopPropagation();
-                    selectionLayer.classList.toggle('hidden');
+                    const isHidden = videoLayer.classList.contains('hidden');
+                    closeAllLayers();
+                    if (isHidden) videoLayer.classList.remove('hidden');
                 });
+                
+                videoLayer.addEventListener('click', (e) => e.stopPropagation());
 
-                // Prevent closing when clicking inside the layer
-                selectionLayer.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                });
-
-                // Handle Item Selection
                 videoItems.forEach(item => {
                     item.addEventListener('click', () => {
                         const title = item.getAttribute('data-title');
-                        console.log('Video item selected:', title);
                         const contentArea = videoCard.querySelector('.card-content');
-                        
-                        // Update Content
                         contentArea.textContent = title;
                         contentArea.classList.remove('initial-text');
                         videoCard.classList.add('active');
-                        
-                        // Close Layer
-                        selectionLayer.classList.add('hidden');
+                        videoLayer.classList.add('hidden');
+                        checkReadyState();
+
+                        if (window.landXiMap) {
+                            window.landXiMap.flyTo([35.416, 127.390], 13, { duration: 1.5 });
+                        }
                     });
                 });
-
-                // Global Click to Close
-                document.addEventListener('click', () => {
-                    selectionLayer.classList.add('hidden');
-                });
-            } else {
-                console.error('Video selection elements not found!');
             }
+
+            if (modelCard && modelLayer) {
+                modelCard.addEventListener('click', (e) => {
+                    if (modelCard.classList.contains('disabled')) return;
+                    e.stopPropagation();
+                    const isHidden = modelLayer.classList.contains('hidden');
+                    closeAllLayers();
+                    if (isHidden) modelLayer.classList.remove('hidden');
+                });
+                
+                modelLayer.addEventListener('click', (e) => e.stopPropagation());
+
+                modelItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        const title = item.getAttribute('data-title');
+                        const contentArea = modelCard.querySelector('.card-content');
+                        contentArea.textContent = title;
+                        contentArea.classList.remove('initial-text');
+                        modelCard.classList.add('active');
+                        modelLayer.classList.add('hidden');
+                        checkReadyState();
+
+                        const pipelineSection = document.querySelector('.pipeline-section');
+                        if (pipelineSection) pipelineSection.classList.remove('hidden');
+                    });
+                });
+            }
+
+            // Extent Card interaction
+            if (extentCard && extentLayer) {
+                extentCard.addEventListener('click', (e) => {
+                    if (extentCard.classList.contains('disabled')) return;
+                    e.stopPropagation();
+                    const isHidden = extentLayer.classList.contains('hidden');
+                    closeAllLayers();
+                    if (isHidden) extentLayer.classList.remove('hidden');
+                });
+                
+                extentLayer.addEventListener('click', (e) => e.stopPropagation());
+
+                extentItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        extentItems.forEach(i => i.classList.remove('active'));
+                        item.classList.add('active');
+
+                        const title = item.getAttribute('data-title');
+                        const contentArea = extentCard.querySelector('.card-content');
+                        contentArea.textContent = title;
+                        contentArea.classList.remove('initial-text');
+                        extentCard.classList.add('active');
+                        extentLayer.classList.add('hidden');
+                        checkReadyState();
+                    });
+                });
+            }
+
+            // Run Analysis Interaction
+            if (analyzeBtn) {
+                analyzeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const progressOverlay = document.getElementById('analysis-progress-overlay');
+                    if (progressOverlay) {
+                        progressOverlay.classList.remove('hidden');
+                        
+                        // Disable the button and the cards
+                        analyzeBtn.disabled = true;
+                        if (videoCard) videoCard.classList.add('disabled');
+                        if (modelCard) modelCard.classList.add('disabled');
+                        if (extentCard) extentCard.classList.add('disabled');
+                        
+                        closeAllLayers();
+                    }
+                });
+            }
+
+            // Global Click to Close
+            document.addEventListener('click', () => {
+                closeAllLayers();
+            });
         });
     </script>
 </body>
