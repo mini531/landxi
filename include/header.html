@@ -1,0 +1,56 @@
+<header class="header">
+    <div class="header-container container">
+        <div class="logo-container">
+            <a href="/NAA_01_01.html" class="logo">
+                <span class="logo-top-line">NAMWON GEOVISION</span>
+                <span class="logo-bottom-line">PLATFORM</span>
+            </a>
+        </div>
+
+        <nav class="nav-wrapper" id="nav-wrapper">
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="#">영상 관리</a></li>
+                <li class="nav-item"><a href="#">학습 데이터</a></li>
+                <li class="nav-item"><a href="#">모델 학습</a></li>
+                <li class="nav-item"><a href="#">모델 탑재</a></li>
+                <li class="nav-item active"><a href="#">분석 실행</a></li>
+                <li class="nav-item"><a href="#">지도 서비스</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-right-actions">
+            <div class="user-session-area">
+                <!-- Desktop Actions -->
+                <div class="user-desktop-actions">
+                    <span class="user-name">
+                        <svg class="user-icon" viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        홍길동님
+                    </span>
+                    <button class="logout-btn">LOGOUT</button>
+                </div>
+
+                <!-- Mobile Actions -->
+                <div class="user-mobile-actions">
+                    <button class="my-btn" onclick="toggleUserMenu(event)">
+                        <svg class="user-icon" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <span>MY</span>
+                    </button>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <a href="#">마이 페이지</a>
+                        <a href="#" class="logout-link">로그아웃</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mobile-toggle" id="mobile-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</header>

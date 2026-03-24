@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>분석 실행 - Namwon Geovision Platform</title>
+    <link rel="stylesheet" href="NAA_01_01.css">
+    <link rel="icon" href="/favicon_n.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div id="header-include"></div>
+
+    <main class="main-area">
+        <div class="container main-container">
+            <div class="main-content-layout">
+                <!-- Left Panel: Analysis Settings (1/3) -->
+                <aside class="analysis-panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">분석 설정</h2>
+                    </div>
+                    <div class="panel-body">
+                        <!-- Selection Cards -->
+                        <div class="settings-group">
+                            <div id="video-card" class="settings-card clickable">
+                                <div class="card-header">
+                                    <div class="card-label">
+                                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m2 8 2 2" /><path d="m20 8 2 2" /><path d="m2 16 2-2" /><path d="m22 16-2-2" /><rect width="8" height="8" x="8" y="8" rx="2" />
+                                            <path d="M15 8V6a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v2" /><path d="M15 16v2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-2" />
+                                        </svg>
+                                        <span>영상</span>
+                                    </div>
+                                    <span class="status-badge">아카이브</span>
+                                </div>
+                                <div class="card-content initial-text">영상을 선택해 주세요</div>
+                            </div>
+
+                            <div id="model-card" class="settings-card clickable">
+                                <div class="card-header">
+                                    <div class="card-label">
+                                        <svg class="card-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.94 12.21 22 12 22C11.79 22 11.59 21.94 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.06 11.79 2 12 2C12.21 2 12.41 2.06 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z"/></svg>
+                                        <span>카드</span>
+                                    </div>
+                                    <span class="status-badge">모델 탑재</span>
+                                </div>
+                                <div class="card-content initial-text">모델을 선택해 주세요</div>
+                            </div>
+
+                            <div id="extent-card" class="settings-card clickable">
+                                <div class="card-header">
+                                    <div class="card-label">
+                                        <svg class="card-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                        <span>범위</span>
+                                    </div>
+                                    <span class="status-badge highlight">아래 방식 택 1</span>
+                                </div>
+                                <div class="card-content initial-text">범위를 선택해 주세요</div>
+                            </div>
+                        </div>
+
+                        <!-- Inference Method Selection -->
+                        <div class="method-section">
+                            <h3 class="section-title">추론 범위 방식</h3>
+                            <div class="method-selector">
+                                <button class="method-btn active">
+                                    <span class="btn-main">필지 기반</span>
+                                    <span class="btn-sub">필지별 크롭</span>
+                                </button>
+                                <button class="method-btn">
+                                    <span class="btn-main">SHP 영역</span>
+                                    <span class="btn-sub">영액 내부 타이링</span>
+                                </button>
+                                <button class="method-btn">
+                                    <span class="btn-main">지도 그리기</span>
+                                    <span class="btn-sub">직접 영역 지정</span>
+                                </button>
+                                <button class="method-btn">
+                                    <span class="btn-main">전체 추론</span>
+                                    <span class="btn-sub">영상 전체</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Run Analysis Button -->
+                        <button class="run-analysis-btn">
+                            <svg class="play-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+                            <span>분석 실행</span>
+                        </button>
+
+                        <!-- Inference Pipeline -->
+                        <div class="pipeline-section">
+                            <h3 class="section-title">추론 파이프라인</h3>
+                            <div class="pipeline-tags">
+                                <span class="tag">크롭</span>
+                                <span class="tag">타일링</span>
+                                <span class="tag">YOLO</span>
+                                <span class="tag">SAM</span>
+                                <span class="tag">병합</span>
+                                <span class="tag">후처리</span>
+                                <span class="tag">GPKG</span>
+                                <span class="tag">GeoServer</span>
+                            </div>
+                        <!-- Inference Pipeline -->
+                        <div class="pipeline-section">
+                            <h3 class="section-title">추론 파이프라인</h3>
+                            <div class="pipeline-tags">
+                                <span class="tag">크롭</span>
+                                <span class="tag">타일링</span>
+                                <span class="tag">YOLO</span>
+                                <span class="tag">SAM</span>
+                                <span class="tag">병합</span>
+                                <span class="tag">후처리</span>
+                                <span class="tag">GPKG</span>
+                                <span class="tag">GeoServer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Selection Layer (Floating Popup) -->
+                    <div id="video-selection-layer" class="video-list-layer hidden">
+                        <div class="layer-header">
+                            <h3 class="layer-title">영상을 선택해 주세요</h3>
+                        </div>
+                        <div class="layer-filters">
+                            <div class="filter-row">
+                                <span class="filter-label">영상 유형</span>
+                                <div class="filter-tags">
+                                    <button class="filter-tag active">전체</button>
+                                    <button class="filter-tag">드론</button>
+                                    <button class="filter-tag">항공</button>
+                                    <button class="filter-tag">위성</button>
+                                </div>
+                            </div>
+                            <div class="filter-row">
+                                <span class="filter-label">포맷</span>
+                                <div class="filter-tags">
+                                    <button class="filter-tag active">전체</button>
+                                    <button class="filter-tag">ECW</button>
+                                    <button class="filter-tag">TIF</button>
+                                    <button class="filter-tag">JPG</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layer-results-header">
+                            <span class="results-count">총 <strong>127</strong>건</span>
+                            <div class="sort-selector">
+                                <button class="sort-btn">최신순 <svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg></button>
+                                <button class="sort-btn">이름순 <svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg></button>
+                            </div>
+                        </div>
+
+                        <div class="video-item-list">
+                            <!-- Sample Video Items with Diverse Formats -->
+                            <div class="video-item clickable" data-title="남원_ecw_6m.ecw">
+                                <div class="item-thumb-container">
+                                    <div class="item-thumb">IMAGE</div>
+                                </div>
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">남원_ecw_6m.ecw</h4>
+                                        <span class="format-badge ecw">ECW</span>
+                                    </div>
+                                    <p class="item-meta">드론 · 1.7cm · 298GB · 2026.03</p>
+                                </div>
+                            </div>
+
+                            <div class="video-item clickable" data-title="imjado.ecw">
+                                <div class="item-thumb-container">
+                                    <div class="item-thumb">IMAGE</div>
+                                </div>
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">imjado.ecw</h4>
+                                        <span class="format-badge ecw">ECW</span>
+                                    </div>
+                                    <p class="item-meta">드론 · 2.0cm · 34GB · 2025.11</p>
+                                </div>
+                            </div>
+
+                            <div class="video-item clickable" data-title="운봉읍_분석용.tif">
+                                <div class="item-thumb-container">
+                                    <div class="item-thumb">IMAGE</div>
+                                </div>
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">운봉읍_분석용.tif</h4>
+                                        <span class="format-badge tif">TIF</span>
+                                    </div>
+                                    <p class="item-meta">항공 · 12cm · 82GB · 2026.04</p>
+                                </div>
+                            </div>
+
+                            <div class="video-item clickable" data-title="남원산단_현장조사.jpg">
+                                <div class="item-thumb-container">
+                                    <div class="item-thumb">IMAGE</div>
+                                </div>
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">남원산단_현장조사.jpg</h4>
+                                        <span class="format-badge jpg">JPG</span>
+                                    </div>
+                                    <p class="item-meta">현장 · 5.0cm · 12MB · 2026.01</p>
+                                </div>
+                            </div>
+
+                            <div class="video-item clickable" data-title="지리산_국립공원_광역.ecw">
+                                <div class="item-thumb-container">
+                                    <div class="item-thumb">IMAGE</div>
+                                </div>
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">지리산_국립공원_광역.ecw</h4>
+                                        <span class="format-badge ecw">ECW</span>
+                                    </div>
+                                    <p class="item-meta">위성 · 50cm · 1.2TB · 2025.08</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination UI -->
+                        <div class="layer-pagination">
+                            <button class="page-nav" disabled>
+                                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                            </button>
+                            <div class="page-numbers">
+                                <button class="page-btn active">1</button>
+                                <button class="page-btn">2</button>
+                                <button class="page-btn">3</button>
+                                <button class="page-btn">4</button>
+                                <button class="page-btn">5</button>
+                            </div>
+                            <button class="page-nav">
+                                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Right Panel: Map Display (2/3) -->
+                <section class="map-container">
+                    <div id="map" class="map-panel"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-include"></div>
+
+    <script src="js/layout.js"></script>
+    <script>
+        // Layout Initialization & Interactive Elements
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Initial Map Setup
+            setTimeout(() => {
+                const map = L.map('map', {
+                    zoomControl: false 
+                }).setView([35.416, 127.390], 13);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap'
+                }).addTo(map);
+
+                L.control.zoom({
+                    position: 'bottomright'
+                }).addTo(map);
+            }, 500);
+
+            // 2. Video Selection Layer Logic
+            const videoCard = document.getElementById('video-card');
+            const selectionLayer = document.getElementById('video-selection-layer');
+            const videoItems = document.querySelectorAll('.video-item');
+
+            if (videoCard && selectionLayer) {
+                // Toggle Layer
+                videoCard.addEventListener('click', (e) => {
+                    console.log('Video card clicked, toggling selection layer');
+                    e.stopPropagation();
+                    selectionLayer.classList.toggle('hidden');
+                });
+
+                // Prevent closing when clicking inside the layer
+                selectionLayer.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+
+                // Handle Item Selection
+                videoItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        const title = item.getAttribute('data-title');
+                        console.log('Video item selected:', title);
+                        const contentArea = videoCard.querySelector('.card-content');
+                        
+                        // Update Content
+                        contentArea.textContent = title;
+                        contentArea.classList.remove('initial-text');
+                        videoCard.classList.add('active');
+                        
+                        // Close Layer
+                        selectionLayer.classList.add('hidden');
+                    });
+                });
+
+                // Global Click to Close
+                document.addEventListener('click', () => {
+                    selectionLayer.classList.add('hidden');
+                });
+            } else {
+                console.error('Video selection elements not found!');
+            }
+        });
+    </script>
+</body>
+</body>
+</html>
