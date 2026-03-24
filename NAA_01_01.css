@@ -314,7 +314,6 @@ body {
 .layer-header {
   padding: 16px 20px;
   border-bottom: 1px solid var(--gray-100);
-  background-color: var(--white);
 }
 
 .layer-title {
