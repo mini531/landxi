@@ -52,9 +52,9 @@ window.addEventListener('click', () => {
 // Automatically load components when the DOM is ready
 document.addEventListener('DOMContentLoaded', async () => {
     // Determine the base path based on current location to support nested structures if needed
-    // For this static prototype, we'll assume root-relative paths starting with /
+    // Using relative paths to support GitHub Pages sub-directory hosting (/landxi/)
     await Promise.all([
-        loadComponent('header-include', '/include/header.html'),
-        loadComponent('footer-include', '/include/footer.html')
+        loadComponent('header-include', 'include/header.html'),
+        loadComponent('footer-include', 'include/footer.html')
     ]);
 });
