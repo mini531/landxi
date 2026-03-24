@@ -621,6 +621,11 @@ body {
   color: var(--primary-color);
 }
 
+.settings-card.active .card-content {
+  color: #2563eb; /* Natural blue point color, replacing primary red */
+  font-weight: 700;
+}
+
 .status-badge {
   font-size: 13px;
   font-weight: 500;
