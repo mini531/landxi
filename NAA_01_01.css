@@ -265,8 +265,7 @@ body {
 .video-list-layer {
   position: absolute;
   left: calc(100% + 15px); /* Positioned relative to .analysis-panel */
-  top: 50%; /* Center vertically with the panel if possible, otherwise adjust */
-  transform: translateY(-50%);
+  top: 55px; /* Aligned vertically with the top video card */
   width: 440px;
   background-color: var(--white);
   border-radius: 12px;
@@ -284,8 +283,7 @@ body {
   content: '';
   position: absolute;
   left: -10px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 40px; /* Aligns with the middle of the '영상' card's height */
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
@@ -297,8 +295,7 @@ body {
   content: '';
   position: absolute;
   left: -8.5px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 40px;
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
@@ -398,16 +395,19 @@ body {
   gap: 8px;
 }
 
-.sort-btn {
-  background: none;
+.sort-select {
   border: none;
+  background-color: transparent;
   font-size: 12px;
   color: var(--gray-600);
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 4px;
   cursor: pointer;
+  outline: none;
+  padding-right: 4px;
+}
+
+.sort-select:focus {
+  color: var(--gray-800);
 }
 
 .video-item-list {
@@ -446,23 +446,6 @@ body {
   border-color: var(--primary-color);
   background-color: rgba(221, 75, 75, 0.02);
   transform: translateX(4px);
-}
-
-.item-thumb-container {
-  flex-shrink: 0;
-}
-
-.item-thumb {
-  width: 50px;
-  height: 50px;
-  border-radius: 4px;
-  background-color: var(--gray-100);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--gray-400);
 }
 
 .item-info {
