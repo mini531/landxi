@@ -1458,6 +1458,21 @@ body {
 }
 
 /* ── Responsive Overrides (Placed last for priority) ────────────────── */
+@media (max-width: 1200px) {
+  .footer-middle {
+    padding-left: 20px;
+  }
+  .footer-row-links,
+  .footer-row-address {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .footer-row-address .divider {
+    display: none;
+  }
+}
+
 @media (max-width: 1024px) {
   .theme2-header-area {
     position: fixed;
@@ -1598,37 +1613,36 @@ body {
   }
 
   .footer-container {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 15px;
+    text-align: center;
+    gap: 20px;
   }
 
   .footer-logos {
-    flex: 1;
-    justify-content: flex-start;
+    width: 100%;
+    justify-content: center;
     order: 1;
   }
 
   .footer-right {
-    flex: 0 0 auto;
-    width: auto;
-    justify-content: flex-end;
+    width: 100%;
+    justify-content: center;
     order: 2;
   }
 
   .footer-middle {
-    padding-left: 0;
     width: 100%;
-    margin-top: 10px;
+    padding-left: 0;
+    align-items: center;
+    margin-top: 0;
     order: 3;
   }
 
+  .footer-row-links,
   .footer-row-address {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
+    align-items: center;
+    text-align: center;
   }
 
   .footer-row-address .divider {
