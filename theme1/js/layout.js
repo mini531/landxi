@@ -19,7 +19,6 @@ async function loadComponent(id, file) {
 
 /**
  * Mobile Menu Toggle Function
- * Must be globally accessible as it's called via onclick in the header.
  */
 function toggleMenu() {
     const wrapper = document.getElementById('nav-wrapper');
@@ -51,8 +50,6 @@ window.addEventListener('click', () => {
 
 // Automatically load components when the DOM is ready
 document.addEventListener('DOMContentLoaded', async () => {
-    // Determine the base path based on current location to support nested structures if needed
-    // Using relative paths to support GitHub Pages sub-directory hosting (/landxi/)
     await Promise.all([
         loadComponent('header-include', 'include/header.html'),
         loadComponent('footer-include', 'include/footer.html')

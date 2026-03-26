@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>분석 실행 - Namwon Geovision Platform</title>
-    <link rel="stylesheet" href="./NAA_01_01.css">
-    <link rel="icon" href="./favicon_n.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./common.css">
+    <link rel="icon" href="/favicon_n.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -90,24 +90,27 @@
                     <div id="video-selection-layer" class="video-list-layer hidden">
                         <div class="layer-header">
                             <h3 class="layer-title">영상을 선택해 주세요</h3>
+                            <button class="layer-close" title="닫기">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
                         </div>
                         <div class="layer-filters">
-                            <div class="filter-row">
+                            <div class="filter-row" data-filter-group="type">
                                 <span class="filter-label">영상 유형</span>
                                 <div class="filter-tags">
-                                    <button class="filter-tag active">전체</button>
-                                    <button class="filter-tag">드론</button>
-                                    <button class="filter-tag">항공</button>
-                                    <button class="filter-tag">위성</button>
+                                    <button class="filter-tag active" data-value="all">전체</button>
+                                    <button class="filter-tag" data-value="drone">드론</button>
+                                    <button class="filter-tag" data-value="aerial">항공</button>
+                                    <button class="filter-tag" data-value="satellite">위성</button>
                                 </div>
                             </div>
-                            <div class="filter-row">
+                            <div class="filter-row" data-filter-group="format">
                                 <span class="filter-label">포맷</span>
                                 <div class="filter-tags">
-                                    <button class="filter-tag active">전체</button>
-                                    <button class="filter-tag">ECW</button>
-                                    <button class="filter-tag">TIF</button>
-                                    <button class="filter-tag">JPG</button>
+                                    <button class="filter-tag active" data-value="all">전체</button>
+                                    <button class="filter-tag" data-value="ecw">ECW</button>
+                                    <button class="filter-tag" data-value="tif">TIF</button>
+                                    <button class="filter-tag" data-value="jpg">JPG</button>
                                 </div>
                             </div>
                         </div>
@@ -124,56 +127,72 @@
                             </div>
                         </div>
 
-                        <div class="video-item-list">
-                            <!-- Sample Video Items with Diverse Formats -->
-                            <div class="video-item clickable" data-title="남원_ecw_6m.ecw">
+                        <div class="video-item-list" id="video-item-list">
+                            <!-- Expanded Sample Video Items for Namwon-si -->
+                            <div class="video-item clickable" data-title="남원_광한루원_드론.ecw" data-type="drone" data-format="ecw">
                                 <div class="item-info">
                                     <div class="item-title-row">
-                                        <h4 class="item-title">남원_ecw_6m.ecw</h4>
+                                        <h4 class="item-title">남원_광한루원_드론.ecw</h4>
                                         <span class="format-badge ecw">ECW</span>
                                     </div>
                                     <p class="item-meta">드론 · 1.7cm · 298GB · 2026.03</p>
                                 </div>
+                                <span class="item-selected-badge">선택됨</span>
                             </div>
 
-                            <div class="video-item clickable" data-title="imjado.ecw">
+                            <div class="video-item clickable" data-title="남원시청_주변_항공.tif" data-type="aerial" data-format="tif">
                                 <div class="item-info">
                                     <div class="item-title-row">
-                                        <h4 class="item-title">imjado.ecw</h4>
-                                        <span class="format-badge ecw">ECW</span>
-                                    </div>
-                                    <p class="item-meta">드론 · 2.0cm · 34GB · 2025.11</p>
-                                </div>
-                            </div>
-
-                            <div class="video-item clickable" data-title="운봉읍_분석용.tif">
-                                <div class="item-info">
-                                    <div class="item-title-row">
-                                        <h4 class="item-title">운봉읍_분석용.tif</h4>
+                                        <h4 class="item-title">남원시청_주변_항공.tif</h4>
                                         <span class="format-badge tif">TIF</span>
                                     </div>
-                                    <p class="item-meta">항공 · 12cm · 82GB · 2026.04</p>
+                                    <p class="item-meta">항공 · 10cm · 142GB · 2025.11</p>
                                 </div>
+                                <span class="item-selected-badge">선택됨</span>
                             </div>
 
-                            <div class="video-item clickable" data-title="남원산단_현장조사.jpg">
+                            <div class="video-item clickable" data-title="지리산_뱀사골_드론.jpg" data-type="drone" data-format="jpg">
                                 <div class="item-info">
                                     <div class="item-title-row">
-                                        <h4 class="item-title">남원산단_현장조사.jpg</h4>
+                                        <h4 class="item-title">지리산_뱀사골_드론.jpg</h4>
                                         <span class="format-badge jpg">JPG</span>
                                     </div>
-                                    <p class="item-meta">현장 · 5.0cm · 12MB · 2026.01</p>
+                                    <p class="item-meta">드론 · 2.5cm · 18GB · 2026.02</p>
                                 </div>
+                                <span class="item-selected-badge">선택됨</span>
                             </div>
 
-                            <div class="video-item clickable" data-title="지리산_국립공원_광역.ecw">
+                            <div class="video-item clickable" data-title="남원_동북권_위성.ecw" data-type="satellite" data-format="ecw">
                                 <div class="item-info">
                                     <div class="item-title-row">
-                                        <h4 class="item-title">지리산_국립공원_광역.ecw</h4>
+                                        <h4 class="item-title">남원_동북권_위성.ecw</h4>
                                         <span class="format-badge ecw">ECW</span>
                                     </div>
                                     <p class="item-meta">위성 · 50cm · 1.2TB · 2025.08</p>
                                 </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+
+                            <div class="video-item clickable" data-title="운봉읍_들녘_드론.tif" data-type="drone" data-format="tif">
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">운봉읍_들녘_드론.tif</h4>
+                                        <span class="format-badge tif">TIF</span>
+                                    </div>
+                                    <p class="item-meta">드론 · 3.0cm · 64GB · 2026.01</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+
+                            <div class="video-item clickable" data-title="남원관광단지_드론.jpg" data-type="drone" data-format="jpg">
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">남원관광단지_드론.jpg</h4>
+                                        <span class="format-badge jpg">JPG</span>
+                                    </div>
+                                    <p class="item-meta">드론 · 2.0cm · 12GB · 2026.04</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
                             </div>
                         </div>
 
@@ -199,12 +218,16 @@
                     <div id="model-selection-layer" class="model-list-layer hidden">
                         <div class="layer-header">
                             <h3 class="layer-title">모델을 선택해 주세요</h3>
+                            <button class="layer-close" title="닫기">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
                         </div>
                         <div class="model-item-list">
                             <!-- Model Items as Grid Cards -->
                             <div class="model-item clickable" data-title="사료작물(생육기)">
                                 <div class="model-thumb">
                                     <img src="./model_img_1.png" alt="사료작물(생육기)">
+                                    <span class="item-selected-badge">선택됨</span>
                                 </div>
                                 <div class="model-info">
                                     <h4 class="model-title">사료작물 (생육기)</h4>
@@ -215,6 +238,7 @@
                             <div class="model-item clickable" data-title="사료작물(생산기)">
                                 <div class="model-thumb">
                                     <img src="./model_img_2.png" alt="사료작물(생산기)">
+                                    <span class="item-selected-badge">선택됨</span>
                                 </div>
                                 <div class="model-info">
                                     <h4 class="model-title">사료작물 (생산기)</h4>
@@ -225,6 +249,7 @@
                             <div class="model-item clickable" data-title="곤포사일리지">
                                 <div class="model-thumb">
                                     <img src="./model_img_3.png" alt="곤포사일리지">
+                                    <span class="item-selected-badge">선택됨</span>
                                 </div>
                                 <div class="model-info">
                                     <h4 class="model-title">곤포사일리지</h4>
@@ -235,6 +260,7 @@
                             <div class="model-item clickable" data-title="비닐하우스">
                                 <div class="model-thumb">
                                     <img src="./model_img_4.png" alt="비닐하우스">
+                                    <span class="item-selected-badge">선택됨</span>
                                 </div>
                                 <div class="model-info">
                                     <h4 class="model-title">비닐하우스</h4>
@@ -245,6 +271,7 @@
                             <div class="model-item clickable" data-title="농지 활용">
                                 <div class="model-thumb">
                                     <img src="./model_img_5.png" alt="농지 활용">
+                                    <span class="item-selected-badge">선택됨</span>
                                 </div>
                                 <div class="model-info">
                                     <h4 class="model-title">농지 활용</h4>
@@ -255,6 +282,7 @@
                             <div class="model-item clickable" data-title="방치 쓰레기">
                                 <div class="model-thumb">
                                     <img src="./model_img_6.png" alt="방치 쓰레기">
+                                    <span class="item-selected-badge">선택됨</span>
                                 </div>
                                 <div class="model-info">
                                     <h4 class="model-title">방치 쓰레기</h4>
@@ -269,6 +297,9 @@
                     <div id="extent-selection-layer" class="extent-list-layer hidden">
                         <div class="layer-header">
                             <h3 class="layer-title">추론 범위를 선택해 주세요</h3>
+                            <button class="layer-close" title="닫기">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
                         </div>
                         <div class="extent-item-list">
                             <div class="extent-item clickable" data-title="필지 기반">
@@ -276,28 +307,28 @@
                                     <h4 class="extent-title">필지 기반</h4>
                                     <p class="extent-desc">필지별 크롭</p>
                                 </div>
-                                <span class="extent-selected-text">선택됨</span>
+                                <span class="item-selected-badge">선택됨</span>
                             </div>
                             <div class="extent-item clickable" data-title="SHP 영역">
                                 <div class="extent-info">
                                     <h4 class="extent-title">SHP 영역</h4>
                                     <p class="extent-desc">영역 내부 타일링</p>
                                 </div>
-                                <span class="extent-selected-text">선택됨</span>
+                                <span class="item-selected-badge">선택됨</span>
                             </div>
                             <div class="extent-item clickable" data-title="지도 그리기">
                                 <div class="extent-info">
                                     <h4 class="extent-title">지도 그리기</h4>
                                     <p class="extent-desc">직접 영역 지정</p>
                                 </div>
-                                <span class="extent-selected-text">선택됨</span>
+                                <span class="item-selected-badge">선택됨</span>
                             </div>
                             <div class="extent-item clickable" data-title="전체 추론">
                                 <div class="extent-info">
                                     <h4 class="extent-title">전체 추론</h4>
                                     <p class="extent-desc">영상 전체</p>
                                 </div>
-                                <span class="extent-selected-text">선택됨</span>
+                                <span class="item-selected-badge">선택됨</span>
                             </div>
                         </div>
                     </div>
@@ -376,12 +407,19 @@
                 }
             };
 
-            // Toggle Layers (Exclusive)
             const closeAllLayers = () => {
                 if (videoLayer) videoLayer.classList.add('hidden');
                 if (modelLayer) modelLayer.classList.add('hidden');
                 if (extentLayer) extentLayer.classList.add('hidden');
             };
+
+            // Close Buttons Interaction
+            document.querySelectorAll('.layer-close').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closeAllLayers();
+                });
+            });
 
             if (videoCard && videoLayer) {
                 videoCard.addEventListener('click', (e) => {
@@ -396,6 +434,9 @@
 
                 videoItems.forEach(item => {
                     item.addEventListener('click', () => {
+                        videoItems.forEach(v => v.classList.remove('active'));
+                        item.classList.add('active');
+                        
                         const title = item.getAttribute('data-title');
                         const contentArea = videoCard.querySelector('.card-content');
                         contentArea.textContent = title;
@@ -424,6 +465,9 @@
 
                 modelItems.forEach(item => {
                     item.addEventListener('click', () => {
+                        modelItems.forEach(m => m.classList.remove('active'));
+                        item.classList.add('active');
+
                         const title = item.getAttribute('data-title');
                         const contentArea = modelCard.querySelector('.card-content');
                         contentArea.textContent = title;
@@ -452,7 +496,7 @@
 
                 extentItems.forEach(item => {
                     item.addEventListener('click', () => {
-                        extentItems.forEach(i => i.classList.remove('active'));
+                        extentItems.forEach(e => e.classList.remove('active'));
                         item.classList.add('active');
 
                         const title = item.getAttribute('data-title');
@@ -489,8 +533,62 @@
             document.addEventListener('click', () => {
                 closeAllLayers();
             });
+
+            // 3. Dynamic Filtering Logic for Video Layer
+            const filterTags = document.querySelectorAll('.filter-tag');
+            const videoItemsList = document.querySelectorAll('.video-item');
+            const resultsCountStrong = document.querySelector('.results-count strong');
+
+            const updateFilters = () => {
+                const activeTypes = Array.from(document.querySelectorAll('[data-filter-group="type"] .filter-tag.active'))
+                    .map(btn => btn.getAttribute('data-value'));
+                const activeFormats = Array.from(document.querySelectorAll('[data-filter-group="format"] .filter-tag.active'))
+                    .map(btn => btn.getAttribute('data-value'));
+
+                let count = 0;
+                videoItemsList.forEach(item => {
+                    const itemType = item.getAttribute('data-type');
+                    const itemFormat = item.getAttribute('data-format');
+
+                    const typeMatch = activeTypes.includes('all') || activeTypes.includes(itemType);
+                    const formatMatch = activeFormats.includes('all') || activeFormats.includes(itemFormat);
+
+                    if (typeMatch && formatMatch) {
+                        item.classList.remove('hidden');
+                        count++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+
+                if (resultsCountStrong) resultsCountStrong.textContent = count;
+            };
+
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const group = tag.closest('.filter-row').getAttribute('data-filter-group');
+                    const value = tag.getAttribute('data-value');
+                    const groupTags = document.querySelectorAll(`[data-filter-group="${group}"] .filter-tag`);
+
+                    if (value === 'all') {
+                        groupTags.forEach(t => t.classList.remove('active'));
+                        tag.classList.add('active');
+                    } else {
+                        const allTag = document.querySelector(`[data-filter-group="${group}"] [data-value="all"]`);
+                        if (allTag) allTag.classList.remove('active');
+                        
+                        tag.classList.toggle('active');
+
+                        // If no tag is active in the group, reactivate "All"
+                        const anyActive = Array.from(groupTags).some(t => t.classList.contains('active'));
+                        if (!anyActive && allTag) allTag.classList.add('active');
+                    }
+
+                    updateFilters();
+                });
+            });
         });
     </script>
-</body>
 </body>
 </html>
