@@ -552,7 +552,7 @@ body {
   width: 280px;
   height: 100%;
   background-color: var(--white);
-  z-index: 2100;
+  z-index: 10001;
   box-shadow: 10px 0 30px rgba(0, 0, 0, 0.15);
   transform: translateX(-100%);
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -572,7 +572,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2050;
+  z-index: 10000;
   display: none;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -1460,7 +1460,12 @@ body {
 /* ── Responsive Overrides (Placed last for priority) ────────────────── */
 @media (max-width: 1024px) {
   .theme2-header-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 70px;
+    z-index: 3000;
   }
 
   .header-top {
@@ -1490,7 +1495,7 @@ body {
   }
 
   .main-area {
-    padding-top: 20px;
+    padding-top: 90px;
   }
 
   .main-content-layout {
