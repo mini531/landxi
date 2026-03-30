@@ -890,9 +890,12 @@ body {
 /* Analysis Panel */
 .analysis-panel {
   flex: 1;
-  background-color: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -900,10 +903,10 @@ body {
 }
 
 .panel-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--gray-100);
-  background-color: var(--white);
-  border-radius: 12px 12px 0 0;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: transparent;
+  border-radius: 16px 16px 0 0;
 }
 
 .panel-title {
@@ -927,17 +930,19 @@ body {
 }
 
 .settings-card {
-  background-color: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: 10px;
-  padding: 16px;
-  transition: 0.2s;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  padding: 18px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
 .settings-card:hover {
-  border-color: var(--gray-400);
-  background-color: var(--gray-50);
+  background-color: rgba(255, 255, 255, 0.82);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .settings-card.active {
@@ -1005,18 +1010,20 @@ body {
 .model-list-layer,
 .extent-list-layer {
   position: absolute;
-  left: calc(100% + 15px);
-  background-color: var(--white);
-  border-radius: 12px;
-  border: 1px solid var(--gray-200);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+  left: calc(100% + 20px);
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), visibility 0.3s;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), visibility 0.4s;
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
 .video-list-layer.hidden,
@@ -1555,9 +1562,11 @@ body {
 .map-panel {
   width: 100%;
   height: 100%;
-  background-color: var(--gray-200);
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  background-color: rgba(240, 240, 240, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   z-index: 1;
 }

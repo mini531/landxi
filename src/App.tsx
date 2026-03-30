@@ -58,7 +58,7 @@ const INITIAL_DATA: ScreenItem[] = [
   { category: '대표 메뉴', menu1: '대시보드', menu2: '', order: '40', id: 'NDB_01_03', name: '남원 대시보드 – 농정과', type: '일반', remarks: '', link: '#' },
   { category: '대표 메뉴', menu1: '대시보드', menu2: '', order: '41', id: 'NDB_01_04', name: '남원 대시보드 – 농업기술센터', type: '일반', remarks: '', link: '#' },
   { category: '대표 메뉴', menu1: '대시보드', menu2: '', order: '42', id: 'NDB_01_05', name: '남원 대시보드 – 일반', type: '일반', remarks: '', link: '#' },
-  { category: '대표 메뉴', menu1: '분석 서비스', menu2: 'AI 분석', order: '43', id: 'NAA_01_01', name: 'AI 분석 목록', type: '일반', remarks: '', link: '#' },
+  { category: '대표 메뉴', menu1: '분석 서비스', menu2: 'AI 분석', order: '43', id: 'NAA_01_01', name: 'AI 분석 목록', type: '일반', remarks: '', link: './theme3/NAA_01_01.html' },
   { category: '대표 메뉴', menu1: '분석 서비스', menu2: 'AI 분석', order: '44', id: 'NAA_01_02', name: 'AI 분석 상세 정보', type: '일반', remarks: '', link: '#' },
   { category: '대표 메뉴', menu1: '분석 서비스', menu2: 'AI 분석', order: '45', id: 'NAA_01_03', name: 'AI 분석 모델 실행 – 단일 모델', type: '일반', remarks: '', link: '#' },
   { category: '대표 메뉴', menu1: '분석 서비스', menu2: 'AI 분석', order: '46', id: 'NAA_01_04', name: 'AI 분석 모델 실행 – 다중 모델', type: '일반', remarks: '', link: '#' },
