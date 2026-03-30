@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>분석 실행 - Namwon Geovision Platform</title>
+    <link rel="stylesheet" href="./common.css">
+    <link rel="icon" href="/favicon_n.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div id="header-include"></div>
+
+    <main class="main-area">
+        <div class="container main-container">
+            <div class="main-content-layout">
+                <!-- Left Panel: Analysis Settings (1/3) -->
+                <aside class="analysis-panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">분석 설정</h2>
+                    </div>
+                    <div class="panel-body">
+                        <!-- Selection Cards -->
+                        <div class="settings-group">
+                            <div id="video-card" class="settings-card clickable">
+                                <div class="card-header">
+                                    <div class="card-label">
+                                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m2 8 2 2" /><path d="m20 8 2 2" /><path d="m2 16 2-2" /><path d="m22 16-2-2" /><rect width="8" height="8" x="8" y="8" rx="2" />
+                                            <path d="M15 8V6a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v2" /><path d="M15 16v2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-2" />
+                                        </svg>
+                                        <span>영상</span>
+                                    </div>
+                                    <span class="status-badge">아카이브</span>
+                                </div>
+                                <div class="card-content initial-text">영상을 선택해 주세요</div>
+                            </div>
+
+                            <div id="model-card" class="settings-card clickable">
+                                <div class="card-header">
+                                    <div class="card-label">
+                                        <svg class="card-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.94 12.21 22 12 22C11.79 22 11.59 21.94 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.06 11.79 2 12 2C12.21 2 12.41 2.06 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z"/></svg>
+                                        <span>모델</span>
+                                    </div>
+                                    <span class="status-badge">모델 탑재</span>
+                                </div>
+                                <div class="card-content initial-text">모델을 선택해 주세요</div>
+                            </div>
+
+                            <div id="extent-card" class="settings-card clickable">
+                                <div class="card-header">
+                                    <div class="card-label">
+                                        <svg class="card-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                        <span>범위</span>
+                                    </div>
+                                    <span class="status-badge">추론 범위 방식</span>
+                                </div>
+                                <div class="card-content initial-text">추론 범위를 선택해 주세요</div>
+                            </div>
+                        </div>
+
+
+                        <!-- Run Analysis Button -->
+                        <button class="run-analysis-btn" id="analyze-btn" disabled>
+                            <svg class="play-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+                            <span>분석 실행</span>
+                        </button>
+
+                        <!-- Inference Pipeline -->
+                        <div class="pipeline-section hidden">
+                            <h4 class="section-title">추론 파이프라인</h4>
+                            <div class="pipeline-tags">
+                                <span class="tag">크롭</span>
+                                <span class="tag">타일링</span>
+                                <span class="tag">YOLO</span>
+                                <span class="tag">SAM</span>
+                                <span class="tag">병합</span>
+                                <span class="tag">후처리</span>
+                                <span class="tag">GPKG</span>
+                                <span class="tag">GeoServer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Selection Layer (Floating Popup) -->
+                    <div id="video-selection-layer" class="video-list-layer hidden">
+                        <div class="layer-header">
+                            <h3 class="layer-title">영상을 선택해 주세요</h3>
+                            <button class="layer-close" title="닫기">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                        </div>
+                        <div class="layer-filters">
+                            <div class="filter-row" data-filter-group="type">
+                                <span class="filter-label">영상 유형</span>
+                                <div class="filter-tags">
+                                    <button class="filter-tag active" data-value="all">전체</button>
+                                    <button class="filter-tag" data-value="drone">드론</button>
+                                    <button class="filter-tag" data-value="aerial">항공</button>
+                                    <button class="filter-tag" data-value="satellite">위성</button>
+                                </div>
+                            </div>
+                            <div class="filter-row" data-filter-group="format">
+                                <span class="filter-label">포맷</span>
+                                <div class="filter-tags">
+                                    <button class="filter-tag active" data-value="all">전체</button>
+                                    <button class="filter-tag" data-value="ecw">ECW</button>
+                                    <button class="filter-tag" data-value="tif">TIF</button>
+                                    <button class="filter-tag" data-value="jpg">JPG</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layer-results-header">
+                            <span class="results-count">총 <strong>127</strong>건</span>
+                            <div class="sort-selector">
+                                <select class="sort-select">
+                                    <option value="newest">최신 순</option>
+                                    <option value="oldest">오래된 순</option>
+                                    <option value="name_asc">이름 순</option>
+                                    <option value="name_desc">이름 역순</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="video-item-list" id="video-item-list">
+                            <!-- Expanded Sample Video Items for Namwon-si -->
+                            <div class="video-item clickable" data-title="남원_광한루원_드론.ecw" data-type="drone" data-format="ecw">
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">남원_광한루원_드론.ecw</h4>
+                                        <span class="format-badge ecw">ECW</span>
+                                    </div>
+                                    <p class="item-meta">드론 · 1.7cm · 298GB · 2026.03</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+
+                            <div class="video-item clickable" data-title="남원시청_주변_항공.tif" data-type="aerial" data-format="tif">
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">남원시청_주변_항공.tif</h4>
+                                        <span class="format-badge tif">TIF</span>
+                                    </div>
+                                    <p class="item-meta">항공 · 10cm · 142GB · 2025.11</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+
+                            <div class="video-item clickable" data-title="지리산_뱀사골_드론.jpg" data-type="drone" data-format="jpg">
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">지리산_뱀사골_드론.jpg</h4>
+                                        <span class="format-badge jpg">JPG</span>
+                                    </div>
+                                    <p class="item-meta">드론 · 2.5cm · 18GB · 2026.02</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+
+                            <div class="video-item clickable" data-title="남원_동북권_위성.ecw" data-type="satellite" data-format="ecw">
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">남원_동북권_위성.ecw</h4>
+                                        <span class="format-badge ecw">ECW</span>
+                                    </div>
+                                    <p class="item-meta">위성 · 50cm · 1.2TB · 2025.08</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+
+                            <div class="video-item clickable" data-title="운봉읍_들녘_드론.tif" data-type="drone" data-format="tif">
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">운봉읍_들녘_드론.tif</h4>
+                                        <span class="format-badge tif">TIF</span>
+                                    </div>
+                                    <p class="item-meta">드론 · 3.0cm · 64GB · 2026.01</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+
+                            <div class="video-item clickable" data-title="남원관광단지_드론.jpg" data-type="drone" data-format="jpg">
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">남원관광단지_드론.jpg</h4>
+                                        <span class="format-badge jpg">JPG</span>
+                                    </div>
+                                    <p class="item-meta">드론 · 2.0cm · 12GB · 2026.04</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+                        </div>
+
+                        <!-- Pagination UI -->
+                        <div class="layer-pagination">
+                            <button class="page-nav" disabled>
+                                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                            </button>
+                            <div class="page-numbers">
+                                <button class="page-btn active">1</button>
+                                <button class="page-btn">2</button>
+                                <button class="page-btn">3</button>
+                                <button class="page-btn">4</button>
+                                <button class="page-btn">5</button>
+                            </div>
+                            <button class="page-nav">
+                                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Model Selection Layer (Floating Popup) -->
+                    <div id="model-selection-layer" class="model-list-layer hidden">
+                        <div class="layer-header">
+                            <h3 class="layer-title">모델을 선택해 주세요</h3>
+                            <button class="layer-close" title="닫기">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                        </div>
+                        <div class="model-item-list">
+                            <!-- Model Items as Grid Cards -->
+                            <div class="model-item clickable" data-title="사료작물(생육기)">
+                                <div class="model-thumb">
+                                    <img src="./model_img_1.png" alt="사료작물(생육기)">
+                                    <span class="item-selected-badge">선택됨</span>
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">사료작물 (생육기)</h4>
+                                    <p class="model-desc">남원 영농 · Seg</p>
+                                    <div class="model-meta">mAP <strong>0.890</strong></div>
+                                </div>
+                            </div>
+                            <div class="model-item clickable" data-title="사료작물(생산기)">
+                                <div class="model-thumb">
+                                    <img src="./model_img_2.png" alt="사료작물(생산기)">
+                                    <span class="item-selected-badge">선택됨</span>
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">사료작물 (생산기)</h4>
+                                    <p class="model-desc">남원 영농 · Seg</p>
+                                    <div class="model-meta">mAP <strong>0.875</strong></div>
+                                </div>
+                            </div>
+                            <div class="model-item clickable" data-title="곤포사일리지">
+                                <div class="model-thumb">
+                                    <img src="./model_img_3.png" alt="곤포사일리지">
+                                    <span class="item-selected-badge">선택됨</span>
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">곤포사일리지</h4>
+                                    <p class="model-desc">남원 영농 · Det</p>
+                                    <div class="model-meta">mAP <strong>0.910</strong></div>
+                                </div>
+                            </div>
+                            <div class="model-item clickable" data-title="비닐하우스">
+                                <div class="model-thumb">
+                                    <img src="./model_img_4.png" alt="비닐하우스">
+                                    <span class="item-selected-badge">선택됨</span>
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">비닐하우스</h4>
+                                    <p class="model-desc">남원 구축물 · Seg</p>
+                                    <div class="model-meta">mAP <strong>0.882</strong></div>
+                                </div>
+                            </div>
+                            <div class="model-item clickable" data-title="농지 활용">
+                                <div class="model-thumb">
+                                    <img src="./model_img_5.png" alt="농지 활용">
+                                    <span class="item-selected-badge">선택됨</span>
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">농지 활용</h4>
+                                    <p class="model-desc">남원 영농 · Cls</p>
+                                    <div class="model-meta">mAP <strong>0.840</strong></div>
+                                </div>
+                            </div>
+                            <div class="model-item clickable" data-title="방치 쓰레기">
+                                <div class="model-thumb">
+                                    <img src="./model_img_6.png" alt="방치 쓰레기">
+                                    <span class="item-selected-badge">선택됨</span>
+                                </div>
+                                <div class="model-info">
+                                    <h4 class="model-title">방치 쓰레기</h4>
+                                    <p class="model-desc">남원 환경 · Det</p>
+                                    <div class="model-meta">mAP <strong>0.750</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Extent Selection Layer (Floating Popup) -->
+                    <div id="extent-selection-layer" class="extent-list-layer hidden">
+                        <div class="layer-header">
+                            <h3 class="layer-title">추론 범위를 선택해 주세요</h3>
+                            <button class="layer-close" title="닫기">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                        </div>
+                        <div class="extent-item-list">
+                            <div class="extent-item clickable" data-title="필지 기반">
+                                <div class="extent-info">
+                                    <h4 class="extent-title">필지 기반</h4>
+                                    <p class="extent-desc">필지별 크롭</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+                            <div class="extent-item clickable" data-title="SHP 영역">
+                                <div class="extent-info">
+                                    <h4 class="extent-title">SHP 영역</h4>
+                                    <p class="extent-desc">영역 내부 타일링</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+                            <div class="extent-item clickable" data-title="지도 그리기">
+                                <div class="extent-info">
+                                    <h4 class="extent-title">지도 그리기</h4>
+                                    <p class="extent-desc">직접 영역 지정</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+                            <div class="extent-item clickable" data-title="전체 추론">
+                                <div class="extent-info">
+                                    <h4 class="extent-title">전체 추론</h4>
+                                    <p class="extent-desc">영상 전체</p>
+                                </div>
+                                <span class="item-selected-badge">선택됨</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Right Panel: Map Display (2/3) -->
+                <section class="map-container">
+                    <!-- Analysis Progress Overlay -->
+                    <div id="analysis-progress-overlay" class="progress-overlay hidden">
+                        <div class="progress-header">
+                            <h3 class="progress-title">분석 진행 중</h3>
+                            <div class="progress-badge">추론중 42%</div>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: 42%;"></div>
+                        </div>
+                        <div class="progress-details">
+                            <p class="progress-stats">필지 1,083 / 2,583 · 잔여 1시간 30분</p>
+                            <p class="progress-step-forward">결과: GPKG → GeoServer 자동 등록 → 지도 레이어 추가</p>
+                            <p class="progress-step-forward">편집(보정) → 학습데이터 자동 생성 → 재학습 순환</p>
+                        </div>
+                    </div>
+                    
+                    <div id="map" class="map-panel"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-include"></div>
+
+    <script src="js/layout.js"></script>
+    <script>
+        // Layout Initialization & Interactive Elements
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Initial Map Setup
+            setTimeout(() => {
+                window.landXiMap = L.map('map', {
+                    zoomControl: false 
+                }).setView([36.3, 127.8], 7);
+
+                L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    maxZoom: 19,
+                    attribution: 'Tiles &copy; Esri'
+                }).addTo(window.landXiMap);
+
+                L.control.zoom({
+                    position: 'bottomright'
+                }).addTo(window.landXiMap);
+            }, 500);
+
+            // 2. Video & Model Selection Layer Logic
+            const videoCard = document.getElementById('video-card');
+            const modelCard = document.getElementById('model-card');
+            const extentCard = document.getElementById('extent-card');
+            const analyzeBtn = document.getElementById('analyze-btn');
+
+            const videoLayer = document.getElementById('video-selection-layer');
+            const modelLayer = document.getElementById('model-selection-layer');
+            const extentLayer = document.getElementById('extent-selection-layer');
+            
+            const videoItems = document.querySelectorAll('.video-item');
+            const modelItems = document.querySelectorAll('.model-item');
+            const extentItems = document.querySelectorAll('.extent-item');
+
+            // Form Validation Logic
+            const checkReadyState = () => {
+                const vSelected = videoCard.classList.contains('active');
+                const mSelected = modelCard.classList.contains('active');
+                const eSelected = extentCard.classList.contains('active');
+                
+                if (vSelected && mSelected && eSelected) {
+                    analyzeBtn.disabled = false;
+                } else {
+                    analyzeBtn.disabled = true;
+                }
+            };
+
+            const closeAllLayers = () => {
+                if (videoLayer) videoLayer.classList.add('hidden');
+                if (modelLayer) modelLayer.classList.add('hidden');
+                if (extentLayer) extentLayer.classList.add('hidden');
+            };
+
+            // Close Buttons Interaction
+            document.querySelectorAll('.layer-close').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closeAllLayers();
+                });
+            });
+
+            if (videoCard && videoLayer) {
+                videoCard.addEventListener('click', (e) => {
+                    if (videoCard.classList.contains('disabled')) return;
+                    e.stopPropagation();
+                    const isHidden = videoLayer.classList.contains('hidden');
+                    closeAllLayers();
+                    if (isHidden) videoLayer.classList.remove('hidden');
+                });
+                
+                videoLayer.addEventListener('click', (e) => e.stopPropagation());
+
+                videoItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        videoItems.forEach(v => v.classList.remove('active'));
+                        item.classList.add('active');
+                        
+                        const title = item.getAttribute('data-title');
+                        const contentArea = videoCard.querySelector('.card-content');
+                        contentArea.textContent = title;
+                        contentArea.classList.remove('initial-text');
+                        videoCard.classList.add('active');
+                        videoLayer.classList.add('hidden');
+                        checkReadyState();
+
+                        if (window.landXiMap) {
+                            window.landXiMap.flyTo([35.416, 127.390], 13, { duration: 1.5 });
+                        }
+                    });
+                });
+            }
+
+            if (modelCard && modelLayer) {
+                modelCard.addEventListener('click', (e) => {
+                    if (modelCard.classList.contains('disabled')) return;
+                    e.stopPropagation();
+                    const isHidden = modelLayer.classList.contains('hidden');
+                    closeAllLayers();
+                    if (isHidden) modelLayer.classList.remove('hidden');
+                });
+                
+                modelLayer.addEventListener('click', (e) => e.stopPropagation());
+
+                modelItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        modelItems.forEach(m => m.classList.remove('active'));
+                        item.classList.add('active');
+
+                        const title = item.getAttribute('data-title');
+                        const contentArea = modelCard.querySelector('.card-content');
+                        contentArea.textContent = title;
+                        contentArea.classList.remove('initial-text');
+                        modelCard.classList.add('active');
+                        modelLayer.classList.add('hidden');
+                        checkReadyState();
+
+                        const pipelineSection = document.querySelector('.pipeline-section');
+                        if (pipelineSection) pipelineSection.classList.remove('hidden');
+                    });
+                });
+            }
+
+            // Extent Card interaction
+            if (extentCard && extentLayer) {
+                extentCard.addEventListener('click', (e) => {
+                    if (extentCard.classList.contains('disabled')) return;
+                    e.stopPropagation();
+                    const isHidden = extentLayer.classList.contains('hidden');
+                    closeAllLayers();
+                    if (isHidden) extentLayer.classList.remove('hidden');
+                });
+                
+                extentLayer.addEventListener('click', (e) => e.stopPropagation());
+
+                extentItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        extentItems.forEach(e => e.classList.remove('active'));
+                        item.classList.add('active');
+
+                        const title = item.getAttribute('data-title');
+                        const contentArea = extentCard.querySelector('.card-content');
+                        contentArea.textContent = title;
+                        contentArea.classList.remove('initial-text');
+                        extentCard.classList.add('active');
+                        extentLayer.classList.add('hidden');
+                        checkReadyState();
+                    });
+                });
+            }
+
+            // Run Analysis Interaction
+            if (analyzeBtn) {
+                analyzeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const progressOverlay = document.getElementById('analysis-progress-overlay');
+                    if (progressOverlay) {
+                        progressOverlay.classList.remove('hidden');
+                        
+                        // Disable the button and the cards
+                        analyzeBtn.disabled = true;
+                        if (videoCard) videoCard.classList.add('disabled');
+                        if (modelCard) modelCard.classList.add('disabled');
+                        if (extentCard) extentCard.classList.add('disabled');
+                        
+                        closeAllLayers();
+                    }
+                });
+            }
+
+            // Global Click to Close
+            document.addEventListener('click', () => {
+                closeAllLayers();
+            });
+
+            // 3. Dynamic Filtering Logic for Video Layer
+            const filterTags = document.querySelectorAll('.filter-tag');
+            const videoItemsList = document.querySelectorAll('.video-item');
+            const resultsCountStrong = document.querySelector('.results-count strong');
+
+            const updateFilters = () => {
+                const activeTypes = Array.from(document.querySelectorAll('[data-filter-group="type"] .filter-tag.active'))
+                    .map(btn => btn.getAttribute('data-value'));
+                const activeFormats = Array.from(document.querySelectorAll('[data-filter-group="format"] .filter-tag.active'))
+                    .map(btn => btn.getAttribute('data-value'));
+
+                let count = 0;
+                videoItemsList.forEach(item => {
+                    const itemType = item.getAttribute('data-type');
+                    const itemFormat = item.getAttribute('data-format');
+
+                    const typeMatch = activeTypes.includes('all') || activeTypes.includes(itemType);
+                    const formatMatch = activeFormats.includes('all') || activeFormats.includes(itemFormat);
+
+                    if (typeMatch && formatMatch) {
+                        item.classList.remove('hidden');
+                        count++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+
+                if (resultsCountStrong) resultsCountStrong.textContent = count;
+            };
+
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const group = tag.closest('.filter-row').getAttribute('data-filter-group');
+                    const value = tag.getAttribute('data-value');
+                    const groupTags = document.querySelectorAll(`[data-filter-group="${group}"] .filter-tag`);
+
+                    if (value === 'all') {
+                        groupTags.forEach(t => t.classList.remove('active'));
+                        tag.classList.add('active');
+                    } else {
+                        const allTag = document.querySelector(`[data-filter-group="${group}"] [data-value="all"]`);
+                        if (allTag) allTag.classList.remove('active');
+                        
+                        tag.classList.toggle('active');
+
+                        // If no tag is active in the group, reactivate "All"
+                        const anyActive = Array.from(groupTags).some(t => t.classList.contains('active'));
+                        if (!anyActive && allTag) allTag.classList.add('active');
+                    }
+
+                    updateFilters();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
