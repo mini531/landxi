@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>분석 실행 - Namwon Geovision Platform</title>
+    <title>遺꾩꽍 ?ㅽ뻾 - Namwon Geovision Platform</title>
     <link rel="stylesheet" href="./common.css">
-    <link rel="icon" href="/favicon_n.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon_n.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
                 <!-- Left Panel: Analysis Settings (1/3) -->
                 <aside class="analysis-panel">
                     <div class="panel-header">
-                        <h2 class="panel-title">분석 설정</h2>
+                        <h2 class="panel-title">遺꾩꽍 ?ㅼ젙</h2>
                     </div>
                     <div class="panel-body">
                         <!-- Selection Cards -->
@@ -33,33 +33,33 @@
                                             <path d="m2 8 2 2" /><path d="m20 8 2 2" /><path d="m2 16 2-2" /><path d="m22 16-2-2" /><rect width="8" height="8" x="8" y="8" rx="2" />
                                             <path d="M15 8V6a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v2" /><path d="M15 16v2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-2" />
                                         </svg>
-                                        <span>영상</span>
+                                        <span>?곸긽</span>
                                     </div>
-                                    <span class="status-badge">아카이브</span>
+                                    <span class="status-badge">?꾩뭅?대툕</span>
                                 </div>
-                                <div class="card-content initial-text">영상을 선택해 주세요</div>
+                                <div class="card-content initial-text">?곸긽???좏깮??二쇱꽭??/div>
                             </div>
 
                             <div id="model-card" class="settings-card clickable">
                                 <div class="card-header">
                                     <div class="card-label">
                                         <svg class="card-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.94 12.21 22 12 22C11.79 22 11.59 21.94 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.06 11.79 2 12 2C12.21 2 12.41 2.06 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z"/></svg>
-                                        <span>모델</span>
+                                        <span>紐⑤뜽</span>
                                     </div>
-                                    <span class="status-badge">모델 탑재</span>
+                                    <span class="status-badge">紐⑤뜽 ?묒옱</span>
                                 </div>
-                                <div class="card-content initial-text">모델을 선택해 주세요</div>
+                                <div class="card-content initial-text">紐⑤뜽???좏깮??二쇱꽭??/div>
                             </div>
 
                             <div id="extent-card" class="settings-card clickable">
                                 <div class="card-header">
                                     <div class="card-label">
                                         <svg class="card-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                                        <span>범위</span>
+                                        <span>踰붿쐞</span>
                                     </div>
-                                    <span class="status-badge">추론 범위 방식</span>
+                                    <span class="status-badge">異붾줎 踰붿쐞 諛⑹떇</span>
                                 </div>
-                                <div class="card-content initial-text">추론 범위를 선택해 주세요</div>
+                                <div class="card-content initial-text">異붾줎 踰붿쐞瑜??좏깮??二쇱꽭??/div>
                             </div>
                         </div>
 
@@ -67,19 +67,19 @@
                         <!-- Run Analysis Button -->
                         <button class="run-analysis-btn" id="analyze-btn" disabled>
                             <svg class="play-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
-                            <span>분석 실행</span>
+                            <span>遺꾩꽍 ?ㅽ뻾</span>
                         </button>
 
                         <!-- Inference Pipeline -->
                         <div class="pipeline-section hidden">
-                            <h4 class="section-title">추론 파이프라인</h4>
+                            <h4 class="section-title">異붾줎 ?뚯씠?꾨씪??/h4>
                             <div class="pipeline-tags">
-                                <span class="tag">크롭</span>
-                                <span class="tag">타일링</span>
+                                <span class="tag">?щ∼</span>
+                                <span class="tag">??쇰쭅</span>
                                 <span class="tag">YOLO</span>
                                 <span class="tag">SAM</span>
-                                <span class="tag">병합</span>
-                                <span class="tag">후처리</span>
+                                <span class="tag">蹂묓빀</span>
+                                <span class="tag">?꾩쿂由?/span>
                                 <span class="tag">GPKG</span>
                                 <span class="tag">GeoServer</span>
                             </div>
@@ -89,22 +89,22 @@
                     <!-- Video Selection Layer (Floating Popup) -->
                     <div id="video-selection-layer" class="video-list-layer hidden">
                         <div class="layer-header">
-                            <h3 class="layer-title">영상을 선택해 주세요</h3>
+                            <h3 class="layer-title">?곸긽???좏깮??二쇱꽭??/h3>
                         </div>
                         <div class="layer-filters">
                             <div class="filter-row">
-                                <span class="filter-label">영상 유형</span>
+                                <span class="filter-label">?곸긽 ?좏삎</span>
                                 <div class="filter-tags">
-                                    <button class="filter-tag active">전체</button>
-                                    <button class="filter-tag">드론</button>
-                                    <button class="filter-tag">항공</button>
-                                    <button class="filter-tag">위성</button>
+                                    <button class="filter-tag active">?꾩껜</button>
+                                    <button class="filter-tag">?쒕줎</button>
+                                    <button class="filter-tag">??났</button>
+                                    <button class="filter-tag">?꾩꽦</button>
                                 </div>
                             </div>
                             <div class="filter-row">
-                                <span class="filter-label">포맷</span>
+                                <span class="filter-label">?щ㎎</span>
                                 <div class="filter-tags">
-                                    <button class="filter-tag active">전체</button>
+                                    <button class="filter-tag active">?꾩껜</button>
                                     <button class="filter-tag">ECW</button>
                                     <button class="filter-tag">TIF</button>
                                     <button class="filter-tag">JPG</button>
@@ -113,26 +113,26 @@
                         </div>
 
                         <div class="layer-results-header">
-                            <span class="results-count">총 <strong>127</strong>건</span>
+                            <span class="results-count">珥?<strong>127</strong>嫄?/span>
                             <div class="sort-selector">
                                 <select class="sort-select">
-                                    <option value="newest">최신 순</option>
-                                    <option value="oldest">오래된 순</option>
-                                    <option value="name_asc">이름 순</option>
-                                    <option value="name_desc">이름 역순</option>
+                                    <option value="newest">理쒖떊 ??/option>
+                                    <option value="oldest">?ㅻ옒????/option>
+                                    <option value="name_asc">?대쫫 ??/option>
+                                    <option value="name_desc">?대쫫 ??닚</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="video-item-list">
                             <!-- Sample Video Items with Diverse Formats -->
-                            <div class="video-item clickable" data-title="남원_ecw_6m.ecw">
+                            <div class="video-item clickable" data-title="?⑥썝_ecw_6m.ecw">
                                 <div class="item-info">
                                     <div class="item-title-row">
-                                        <h4 class="item-title">남원_ecw_6m.ecw</h4>
+                                        <h4 class="item-title">?⑥썝_ecw_6m.ecw</h4>
                                         <span class="format-badge ecw">ECW</span>
                                     </div>
-                                    <p class="item-meta">드론 · 1.7cm · 298GB · 2026.03</p>
+                                    <p class="item-meta">?쒕줎 쨌 1.7cm 쨌 298GB 쨌 2026.03</p>
                                 </div>
                             </div>
 
@@ -142,37 +142,37 @@
                                         <h4 class="item-title">imjado.ecw</h4>
                                         <span class="format-badge ecw">ECW</span>
                                     </div>
-                                    <p class="item-meta">드론 · 2.0cm · 34GB · 2025.11</p>
+                                    <p class="item-meta">?쒕줎 쨌 2.0cm 쨌 34GB 쨌 2025.11</p>
                                 </div>
                             </div>
 
-                            <div class="video-item clickable" data-title="운봉읍_분석용.tif">
+                            <div class="video-item clickable" data-title="?대큺??遺꾩꽍??tif">
                                 <div class="item-info">
                                     <div class="item-title-row">
-                                        <h4 class="item-title">운봉읍_분석용.tif</h4>
+                                        <h4 class="item-title">?대큺??遺꾩꽍??tif</h4>
                                         <span class="format-badge tif">TIF</span>
                                     </div>
-                                    <p class="item-meta">항공 · 12cm · 82GB · 2026.04</p>
+                                    <p class="item-meta">??났 쨌 12cm 쨌 82GB 쨌 2026.04</p>
                                 </div>
                             </div>
 
-                            <div class="video-item clickable" data-title="남원산단_현장조사.jpg">
+                            <div class="video-item clickable" data-title="?⑥썝?곕떒_?꾩옣議곗궗.jpg">
                                 <div class="item-info">
                                     <div class="item-title-row">
-                                        <h4 class="item-title">남원산단_현장조사.jpg</h4>
+                                        <h4 class="item-title">?⑥썝?곕떒_?꾩옣議곗궗.jpg</h4>
                                         <span class="format-badge jpg">JPG</span>
                                     </div>
-                                    <p class="item-meta">현장 · 5.0cm · 12MB · 2026.01</p>
+                                    <p class="item-meta">?꾩옣 쨌 5.0cm 쨌 12MB 쨌 2026.01</p>
                                 </div>
                             </div>
 
-                            <div class="video-item clickable" data-title="지리산_국립공원_광역.ecw">
+                            <div class="video-item clickable" data-title="吏由ъ궛_援?┰怨듭썝_愿묒뿭.ecw">
                                 <div class="item-info">
                                     <div class="item-title-row">
-                                        <h4 class="item-title">지리산_국립공원_광역.ecw</h4>
+                                        <h4 class="item-title">吏由ъ궛_援?┰怨듭썝_愿묒뿭.ecw</h4>
                                         <span class="format-badge ecw">ECW</span>
                                     </div>
-                                    <p class="item-meta">위성 · 50cm · 1.2TB · 2025.08</p>
+                                    <p class="item-meta">?꾩꽦 쨌 50cm 쨌 1.2TB 쨌 2025.08</p>
                                 </div>
                             </div>
                         </div>
@@ -198,67 +198,67 @@
                     <!-- Model Selection Layer (Floating Popup) -->
                     <div id="model-selection-layer" class="model-list-layer hidden">
                         <div class="layer-header">
-                            <h3 class="layer-title">모델을 선택해 주세요</h3>
+                            <h3 class="layer-title">紐⑤뜽???좏깮??二쇱꽭??/h3>
                         </div>
                         <div class="model-item-list">
                             <!-- Model Items as Grid Cards -->
-                            <div class="model-item clickable" data-title="사료작물(생육기)">
+                            <div class="model-item clickable" data-title="?щ즺?묐Ъ(?앹쑁湲?">
                                 <div class="model-thumb">
-                                    <img src="./model_img_1.png" alt="사료작물(생육기)">
+                                    <img src="./model_img_1.png" alt="?щ즺?묐Ъ(?앹쑁湲?">
                                 </div>
                                 <div class="model-info">
-                                    <h4 class="model-title">사료작물 (생육기)</h4>
-                                    <p class="model-desc">남원 영농 · Seg</p>
+                                    <h4 class="model-title">?щ즺?묐Ъ (?앹쑁湲?</h4>
+                                    <p class="model-desc">?⑥썝 ?곷냽 쨌 Seg</p>
                                     <div class="model-meta">mAP <strong>0.890</strong></div>
                                 </div>
                             </div>
-                            <div class="model-item clickable" data-title="사료작물(생산기)">
+                            <div class="model-item clickable" data-title="?щ즺?묐Ъ(?앹궛湲?">
                                 <div class="model-thumb">
-                                    <img src="./model_img_2.png" alt="사료작물(생산기)">
+                                    <img src="./model_img_2.png" alt="?щ즺?묐Ъ(?앹궛湲?">
                                 </div>
                                 <div class="model-info">
-                                    <h4 class="model-title">사료작물 (생산기)</h4>
-                                    <p class="model-desc">남원 영농 · Seg</p>
+                                    <h4 class="model-title">?щ즺?묐Ъ (?앹궛湲?</h4>
+                                    <p class="model-desc">?⑥썝 ?곷냽 쨌 Seg</p>
                                     <div class="model-meta">mAP <strong>0.875</strong></div>
                                 </div>
                             </div>
-                            <div class="model-item clickable" data-title="곤포사일리지">
+                            <div class="model-item clickable" data-title="怨ㅽ룷?ъ씪由ъ?">
                                 <div class="model-thumb">
-                                    <img src="./model_img_3.png" alt="곤포사일리지">
+                                    <img src="./model_img_3.png" alt="怨ㅽ룷?ъ씪由ъ?">
                                 </div>
                                 <div class="model-info">
-                                    <h4 class="model-title">곤포사일리지</h4>
-                                    <p class="model-desc">남원 영농 · Det</p>
+                                    <h4 class="model-title">怨ㅽ룷?ъ씪由ъ?</h4>
+                                    <p class="model-desc">?⑥썝 ?곷냽 쨌 Det</p>
                                     <div class="model-meta">mAP <strong>0.910</strong></div>
                                 </div>
                             </div>
-                            <div class="model-item clickable" data-title="비닐하우스">
+                            <div class="model-item clickable" data-title="鍮꾨땺?섏슦??>
                                 <div class="model-thumb">
-                                    <img src="./model_img_4.png" alt="비닐하우스">
+                                    <img src="./model_img_4.png" alt="鍮꾨땺?섏슦??>
                                 </div>
                                 <div class="model-info">
-                                    <h4 class="model-title">비닐하우스</h4>
-                                    <p class="model-desc">남원 구축물 · Seg</p>
+                                    <h4 class="model-title">鍮꾨땺?섏슦??/h4>
+                                    <p class="model-desc">?⑥썝 援ъ텞臾?쨌 Seg</p>
                                     <div class="model-meta">mAP <strong>0.882</strong></div>
                                 </div>
                             </div>
-                            <div class="model-item clickable" data-title="농지 활용">
+                            <div class="model-item clickable" data-title="?띿? ?쒖슜">
                                 <div class="model-thumb">
-                                    <img src="./model_img_5.png" alt="농지 활용">
+                                    <img src="./model_img_5.png" alt="?띿? ?쒖슜">
                                 </div>
                                 <div class="model-info">
-                                    <h4 class="model-title">농지 활용</h4>
-                                    <p class="model-desc">남원 영농 · Cls</p>
+                                    <h4 class="model-title">?띿? ?쒖슜</h4>
+                                    <p class="model-desc">?⑥썝 ?곷냽 쨌 Cls</p>
                                     <div class="model-meta">mAP <strong>0.840</strong></div>
                                 </div>
                             </div>
-                            <div class="model-item clickable" data-title="방치 쓰레기">
+                            <div class="model-item clickable" data-title="諛⑹튂 ?곕젅湲?>
                                 <div class="model-thumb">
-                                    <img src="./model_img_6.png" alt="방치 쓰레기">
+                                    <img src="./model_img_6.png" alt="諛⑹튂 ?곕젅湲?>
                                 </div>
                                 <div class="model-info">
-                                    <h4 class="model-title">방치 쓰레기</h4>
-                                    <p class="model-desc">남원 환경 · Det</p>
+                                    <h4 class="model-title">諛⑹튂 ?곕젅湲?/h4>
+                                    <p class="model-desc">?⑥썝 ?섍꼍 쨌 Det</p>
                                     <div class="model-meta">mAP <strong>0.750</strong></div>
                                 </div>
                             </div>
@@ -268,36 +268,36 @@
                     <!-- Extent Selection Layer (Floating Popup) -->
                     <div id="extent-selection-layer" class="extent-list-layer hidden">
                         <div class="layer-header">
-                            <h3 class="layer-title">추론 범위를 선택해 주세요</h3>
+                            <h3 class="layer-title">異붾줎 踰붿쐞瑜??좏깮??二쇱꽭??/h3>
                         </div>
                         <div class="extent-item-list">
-                            <div class="extent-item clickable" data-title="필지 기반">
+                            <div class="extent-item clickable" data-title="?꾩? 湲곕컲">
                                 <div class="extent-info">
-                                    <h4 class="extent-title">필지 기반</h4>
-                                    <p class="extent-desc">필지별 크롭</p>
+                                    <h4 class="extent-title">?꾩? 湲곕컲</h4>
+                                    <p class="extent-desc">?꾩?蹂??щ∼</p>
                                 </div>
-                                <span class="extent-selected-text">선택됨</span>
+                                <span class="extent-selected-text">?좏깮??/span>
                             </div>
-                            <div class="extent-item clickable" data-title="SHP 영역">
+                            <div class="extent-item clickable" data-title="SHP ?곸뿭">
                                 <div class="extent-info">
-                                    <h4 class="extent-title">SHP 영역</h4>
-                                    <p class="extent-desc">영역 내부 타일링</p>
+                                    <h4 class="extent-title">SHP ?곸뿭</h4>
+                                    <p class="extent-desc">?곸뿭 ?대? ??쇰쭅</p>
                                 </div>
-                                <span class="extent-selected-text">선택됨</span>
+                                <span class="extent-selected-text">?좏깮??/span>
                             </div>
-                            <div class="extent-item clickable" data-title="지도 그리기">
+                            <div class="extent-item clickable" data-title="吏??洹몃━湲?>
                                 <div class="extent-info">
-                                    <h4 class="extent-title">지도 그리기</h4>
-                                    <p class="extent-desc">직접 영역 지정</p>
+                                    <h4 class="extent-title">吏??洹몃━湲?/h4>
+                                    <p class="extent-desc">吏곸젒 ?곸뿭 吏??/p>
                                 </div>
-                                <span class="extent-selected-text">선택됨</span>
+                                <span class="extent-selected-text">?좏깮??/span>
                             </div>
-                            <div class="extent-item clickable" data-title="전체 추론">
+                            <div class="extent-item clickable" data-title="?꾩껜 異붾줎">
                                 <div class="extent-info">
-                                    <h4 class="extent-title">전체 추론</h4>
-                                    <p class="extent-desc">영상 전체</p>
+                                    <h4 class="extent-title">?꾩껜 異붾줎</h4>
+                                    <p class="extent-desc">?곸긽 ?꾩껜</p>
                                 </div>
-                                <span class="extent-selected-text">선택됨</span>
+                                <span class="extent-selected-text">?좏깮??/span>
                             </div>
                         </div>
                     </div>
@@ -308,16 +308,16 @@
                     <!-- Analysis Progress Overlay -->
                     <div id="analysis-progress-overlay" class="progress-overlay hidden">
                         <div class="progress-header">
-                            <h3 class="progress-title">분석 진행 중</h3>
-                            <div class="progress-badge">추론중 42%</div>
+                            <h3 class="progress-title">遺꾩꽍 吏꾪뻾 以?/h3>
+                            <div class="progress-badge">異붾줎以?42%</div>
                         </div>
                         <div class="progress-track">
                             <div class="progress-fill" style="width: 42%;"></div>
                         </div>
                         <div class="progress-details">
-                            <p class="progress-stats">필지 1,083 / 2,583 · 잔여 1시간 30분</p>
-                            <p class="progress-step-forward">결과: GPKG → GeoServer 자동 등록 → 지도 레이어 추가</p>
-                            <p class="progress-step-forward">편집(보정) → 학습데이터 자동 생성 → 재학습 순환</p>
+                            <p class="progress-stats">?꾩? 1,083 / 2,583 쨌 ?붿뿬 1?쒓컙 30遺?/p>
+                            <p class="progress-step-forward">寃곌낵: GPKG ??GeoServer ?먮룞 ?깅줉 ??吏???덉씠??異붽?</p>
+                            <p class="progress-step-forward">?몄쭛(蹂댁젙) ???숈뒿?곗씠???먮룞 ?앹꽦 ???ы븰???쒗솚</p>
                         </div>
                     </div>
                     
@@ -494,3 +494,4 @@
 </body>
 </body>
 </html>
+
